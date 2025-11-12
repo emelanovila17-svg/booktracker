@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог книг - BookTracker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">BookTracker</div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link active">Каталог</a>
+                <a href="profile.html" class="nav-link">Мой кабинет</a>
+            </nav>
+            <div class="search">
+                <input type="text" placeholder="Найти книгу..." id="searchInput">
+                <button onclick="searchBooks()">🔍</button>
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="catalog">
+            <div class="container">
+                <h1>Каталог книг</h1>
+                
+                <div class="filters">
+                    <select id="genreFilter">
+                        <option value="all">Все жанры</option>
+                        <option value="fantasy">Фантастика</option>
+                        <option value="classic">Классика</option>
+                        <option value="drama">Драма</option>
+                    </select>
+                    <button onclick="applyFilters()">Применить</button>
+                </div>
+
+                <div class="books-grid" id="booksGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BookTracker</h3>
+                <p>Ваша цифровая библиотека для учета прочитанных книг</p>
+            </div>
+            <div class="footer-section">
+                <h4>Навигация</h4>
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="profile.html">Мой кабинет</a>
+            </div>
+            <div class="footer-section">
+                <h4>Контакты</h4>
+                <p>📧 email@example.com</p>
+                <p>📱 +7 (999) 999-99-99</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 BookTracker. Учебный проект для курсовой работы.</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

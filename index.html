@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookTracker - Ваша цифровая библиотека</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">BookTracker</div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="profile.html" class="nav-link">Мой кабинет</a>
+            </nav>
+           <div class="search">
+                <input type="text" placeholder="Найти книгу..." id="searchInput">
+                <button onclick="searchBooks()">🔍</button>
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Ваша личная цифровая библиотека</h1>
+            <p>Отслеживайте прочитанное, открывайте новое и делитесь впечатлениями</p>
+            <a href="catalog.html" class="btn">Начать чтение</a>
+        </div>
+    </section>
+
+    <section class="popular">
+        <div class="container">
+            <h2>Популярные книги</h2>
+            <div class="books-grid">
+    <div class="book-card" onclick="openBook(1)">
+        <div class="book-cover" style="background-image: url('images/1984.webp')"></div>
+        <div class="book-rating">⭐️⭐️⭐️⭐️☆</div>
+        <h3>1984</h3>
+        <p>Джордж Оруэлл</p>
+        <button class="favorite-btn" onclick="toggleFavorite(event, 1)">🤍</button>
+    </div>
+    <div class="book-card" onclick="openBook(2)">
+        <div class="book-cover" style="background-image: url('images/master-margarita.webp')"></div>
+        <div class="book-rating">⭐️⭐️⭐️⭐️⭐️</div>
+        <h3>Мастер и Маргарита</h3>
+        <p>Михаил Булгаков</p>
+        <button class="favorite-btn" onclick="toggleFavorite(event, 2)">🤍</button>
+    </div>
+    <div class="book-card" onclick="openBook(3)">
+        <div class="book-cover" style="background-image: url('images/prestuplenie.webp')"></div>
+        <div class="book-rating">⭐️⭐️⭐️⭐️☆</div>
+        <h3>Преступление и наказание</h3>
+        <p>Фёдор Достоевский</p>
+        <button class="favorite-btn" onclick="toggleFavorite(event, 3)">🤍</button>
+    </div>
+    <div class="book-card" onclick="openBook(4)">
+        <div class="book-cover" style="background-image: url('images/tri-tovarishcha.webp')"></div>
+        <div class="book-rating">⭐️⭐️⭐️☆☆</div>
+        <h3>Три товарища</h3>
+        <p>Эрих Мария Ремарк</p>
+        <button class="favorite-btn" onclick="toggleFavorite(event, 4)">🤍</button>
+    </div>
+    <div class="book-card" onclick="openBook(5)">
+        <div class="book-cover" style="background-image: url('images/malenkiy-prints.webp')"></div>
+        <div class="book-rating">⭐️⭐️⭐️⭐️☆</div>
+        <h3>Маленький принц</h3>
+        <p>Антуан де Сент-Экзюпери</p>
+        <button class="favorite-btn" onclick="toggleFavorite(event, 5)">🤍</button>
+    </div>
+</div>
+        </div>
+    </section>
+    <section class="how-it-works">
+    <div class="container">
+        <h2>Ведите свой читательский дневник</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🔍</div>
+                <h3>Ищите</h3>
+                <p>Найдите книгу в нашем каталоге</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">➕</div>
+                <h3>Добавляйте</h3>
+                <p>Сохраняйте книги в свои коллекции</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⭐</div>
+                <h3>Оценивайте</h3>
+                <p>Ставьте оценки и пишите рецензии</p>
+            </div>
+        </div>
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BookTracker</h3>
+                <p>Ваша цифровая библиотека для учета прочитанных книг</p>
+            </div>
+            <div class="footer-section">
+                <h4>Навигация</h4>
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="profile.html">Мой кабинет</a>
+            </div>
+            <div class="footer-section">
+                <h4>Контакты</h4>
+                <p>📧 email@example.com</p>
+                <p>📱 +7 (999) 999-99-99</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 BookTracker. Учебный проект для курсовой работы.</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

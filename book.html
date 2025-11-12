@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookTracker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">BookTracker</div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="profile.html" class="nav-link">Мой кабинет</a>
+            </nav>
+            <div class="search">
+                <input type="text" placeholder="Найти книгу..." id="searchInput">
+                <button onclick="searchBooks()">🔍</button>
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="index.html">Главная</a> > 
+            <a href="catalog.html">Каталог</a> > 
+            <span id="bookTitle">Книга</span>
+        </div>
+    </div>
+
+    <main class="main">
+        <section class="book-detail">
+            <div class="container">
+                <div class="book-layout">
+                    <div class="book-cover-large">
+                        <div class="book-cover" id="bookCover" style="width: 250px; height: 350px; border-radius: 10px; background-size: cover; background-position: center;"></div>
+                    </div>
+                    
+                    <div class="book-info">
+                        <h1 id="bookTitleHeader">Название книги</h1>
+                        <div class="book-meta">
+                            <p><strong>Автор:</strong> <span id="bookAuthor">Автор</span></p>
+                            <p><strong>Жанр:</strong> <span id="bookGenre">Жанр</span></p>
+                            <div class="book-rating-large" id="bookRating">⭐️⭐️⭐️⭐️⭐️ (5.0)</div>
+                        </div>
+                        
+                        <div class="book-description">
+                            <h3>Описание</h3>
+                            <p id="bookDescription">Описание книги появится здесь...</p>
+                        </div>
+                        
+                        <div class="book-actions">
+                            <button class="btn-favorite" id="favoriteBtn" onclick="toggleFavorite(event, getBookId())">🤍 Добавить в избранное</button>
+                            <select class="btn-status">
+                                <option>Хочу прочитать</option>
+                                <option>Читаю сейчас</option>
+                                <option>Прочитано</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rating-section">
+                    <h3>Оцените книгу</h3>
+                    <div class="star-rating">
+                        <span onclick="rateBook(1)">☆</span>
+                        <span onclick="rateBook(2)">☆</span>
+                        <span onclick="rateBook(3)">☆</span>
+                        <span onclick="rateBook(4)">☆</span>
+                        <span onclick="rateBook(5)">☆</span>
+                    </div>
+                </div>
+                
+                <div class="reviews-section">
+                    <h3>Рецензии</h3>
+                    <div class="review-form">
+                        <textarea placeholder="Напишите вашу рецензию..." id="reviewText"></textarea>
+                        <button class="btn" onclick="addReview()">Добавить рецензию</button>
+                    </div>
+                    
+                    <div class="reviews-list" id="reviewsList">
+                        <div class="review">
+                            <div class="review-header">
+                                <strong>Анна К.</strong>
+                                <div class="review-rating">⭐️⭐️⭐️⭐️⭐️</div>
+                            </div>
+                            <p>"Отличная книга! Очень рекомендую к прочтению."</p>
+                            <div class="review-date">15 декабря 2024</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>BookTracker</h3>
+                <p>Ваша цифровая библиотека для учета прочитанных книг</p>
+            </div>
+            <div class="footer-section">
+                <h4>Навигация</h4>
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="profile.html">Мой кабинет</a>
+            </div>
+            <div class="footer-section">
+                <h4>Контакты</h4>
+                <p>📧 email@example.com</p>
+                <p>📱 +7 (999) 999-99-99</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 BookTracker. Учебный проект для курсовой работы.</p>
+        </div>
+    </div>
+</footer>
+ <script src="js/script.js"></script>
+    <script>
+        function getBookId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return parseInt(urlParams.get('id')) || 1;
+        }
+
+        function loadBookData() {
+            const bookId = getBookId();
+            const book = window.books.find(b => b.id === bookId) || window.books[0];
+            
+            if (book) {
+                document.getElementById('bookTitle').textContent = book.title;
+                document.getElementById('bookTitleHeader').textContent = book.title;
+                document.getElementById('bookAuthor').textContent = book.author;
+                document.getElementById('bookGenre').textContent = getGenreName(book.genre);
+                document.getElementById('bookDescription').textContent = book.description;
+                document.getElementById('bookCover').style.backgroundImage = `url('${book.coverImage}')`;
+                
+                const ratingElement = document.getElementById('bookRating');
+                ratingElement.innerHTML = `${'⭐'.repeat(book.rating)}${'☆'.repeat(5-book.rating)} (${book.rating}.0)`;
+                
+                document.title = `${book.title} - BookTracker`;
+                updateFavoriteButton();
+            }
+        }
+
+        function getGenreName(genre) {
+            const genres = {
+                'fantasy': 'Фантастика',
+                'classic': 'Классика', 
+                'drama': 'Драма'
+            };
+            return genres[genre] || genre;
+        }
+
+        function updateFavoriteButton() {
+            const favoriteBtn = document.getElementById('favoriteBtn');
+            if (!favoriteBtn) return;
+            
+            const bookId = getBookId();
+            const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+            const isFavorite = favorites.includes(bookId);
+            
+            favoriteBtn.textContent = isFavorite ? '❤️ В избранном' : '🤍 Добавить в избранное';
+        }
+
+        function rateBook(rating) {
+            const stars = document.querySelectorAll('.star-rating span');
+            stars.forEach((star, index) => {
+                star.textContent = index < rating ? '⭐' : '☆';
+            });
+            alert(`Вы поставили оценку: ${rating} звезд`);
+        }
+
+        function addReview() {
+            const reviewText = document.getElementById('reviewText');
+            if (!reviewText || reviewText.value.trim() === '') {
+                alert('Введите текст рецензии!');
+                return;
+            }
+            
+            const reviewsList = document.getElementById('reviewsList');
+            const newReview = document.createElement('div');
+            newReview.className = 'review';
+            newReview.innerHTML = `
+                <div class="review-header">
+                    <strong>Вы</strong>
+                    <div class="review-rating">⭐️⭐️⭐️⭐️⭐️</div>
+                </div>
+                <p>"${reviewText.value}"</p>
+                <div class="review-date">Только что</div>
+            `;
+            
+            reviewsList.prepend(newReview);
+            reviewText.value = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBookData();
+        });
+    </script>
+   
+</body>
+</html>
